@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="BASE_URL">https://stackoverflow.com/questions/44250184/setting-environment-variables-in-flutter</string>
+
+<string name="PASSWORD">123@stg</string>
+
+<string name="HOST_URL">https://weibo.com</string>
+</resources>

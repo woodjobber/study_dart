@@ -1,0 +1,33 @@
+app:
+  android:
+    flavorDimensions: "env"
+
+flavors:
+  # 环境名称：
+  prod:
+    app:
+      name: "Apple"
+
+    android:
+      applicationId: "com.example.apple"
+    ios:
+      bundleId: "com.example.apple"
+
+  dev:
+    app:
+      name: "Banana"
+
+    android:
+      applicationId: "com.example.banana"
+    ios:
+      bundleId: "com.example.banana"
+  stg:
+    app:
+      name: "栗子"
+
+    android:
+      applicationId: "com.example.lz"
+    ios:
+      bundleId: "com.example.lz"
+
+ide: idea
