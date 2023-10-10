@@ -69,6 +69,7 @@ void testYield() {
   });
 }
 
+/// yield,yield*,sync* <Iterable<T>>,async* <Stream<T>>
 Stream<int> runToMax(int n) async* {
   int i = 0;
   while (i < n) {
