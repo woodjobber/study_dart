@@ -56,6 +56,51 @@ FutureOr<void> main() async {
     FlutterBugly.putUserData(key: "customKey", value: "2");
     runApp(const App());
   }, debugUpload: true);
+  testYield();
+}
+
+void testYield() {
+  var d = countDown(4);
+  d.forEach((element) {
+    print(element);
+  });
+  countDownFrom(5).forEach((element) {
+    print(element);
+  });
+}
+
+Stream<int> runToMax(int n) async* {
+  int i = 0;
+  while (i < n) {
+    yield i;
+    i++;
+    await Future.delayed(Duration(seconds: 1));
+  }
+}
+
+Stream<int> countDownFrom(int n) async* {
+  if (n > 0) {
+    yield n;
+    yield* runToMax(n - 1);
+  }
+}
+
+Iterable<int> countDown(int n) sync* {
+  if (n > 0) {
+    yield n;
+
+    /// yield 发送 值，不会中断函数，it like 'return' ,but not.
+    /// yield* 委托调用另一个迭代器，一旦迭代器停止生产值，将恢复主迭代器
+    yield* genIterates(n - 1);
+  }
+}
+
+Iterable<int> genIterates(int max) sync* {
+  var i = 0;
+  while (i < max) {
+    yield i;
+    i++;
+  }
 }
 
 class CustomErrorScreen extends StatelessWidget {
