@@ -29,5 +29,5 @@ class _KeepAliveState extends State<KeepAlivePage>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => widget.keepAlive;
 }
