@@ -53,8 +53,8 @@ class Ned extends Amigo {
       line = line.trim();
       if (line.contains('=') //Set Key Value Pairs on lines separated by =
           &&
-          !line.startsWith(RegExp(r'=|#'))) {
-        //No need to add emty keys and remove comments
+          !line.startsWith(RegExp(r'=\|#'))) {
+        //No need to add empty keys and remove comments
         List<String> contents = line.split('=');
         environment[contents[0]] = contents.sublist(1).join('=');
       }
@@ -119,4 +119,28 @@ Future<List<int>> _expensiveWork() async {
     result.add(i);
   }
   return result;
+}
+
+class Student {
+  String _name;
+  int _age;
+  String get name => _name;
+  set name(String name) => _name = name;
+  int get age => _age;
+  set age(int age) => _age = age;
+
+  Student({int? age, String? name})
+      : _name = name ?? '',
+        _age = age ?? 0;
+
+  Student.fromJson(Map<String, dynamic> map)
+      : _name = map['name'] ?? '',
+        _age = map['age'] ?? 0;
+
+  factory Student.fromMap(Map<String, dynamic> map) {
+    return Student(
+      name: map['name'],
+      age: map['age'],
+    );
+  }
 }

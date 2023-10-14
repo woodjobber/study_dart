@@ -41,6 +41,7 @@ dependencies:
   envied: ^0.3.0+3
   flutter_bugly: ^0.4.4
   flutter_swipe_detector: ^2.0.0
+  widget_with_codeview: ^3.1.0
   another_transformer_page_view: ^2.0.1
 dev_dependencies:
   flutter_test:
