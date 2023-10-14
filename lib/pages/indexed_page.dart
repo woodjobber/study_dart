@@ -1,10 +1,8 @@
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
-import 'package:study_dart/amigo.dart';
+import 'package:study_dart/pages/custom_bottom_navigation_bar.dart';
 import 'package:study_dart/pages/keep_alive_page.dart';
 import 'package:study_dart/pages/preload_page_view.dart';
 
@@ -36,22 +34,33 @@ class _IndexedPageState extends State<IndexedPage> {
 
   bool pageViewEnable = true;
 
+  final changeIndexNotifier = ValueNotifier(0);
+  bool leftToRight = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          currentIndex = 3;
-          if (pageViewEnable) {
-            controller.jumpToPage(3);
+          if (currentIndex == 3) {
+            leftToRight = false;
+          } else if (currentIndex == 0) {
+            leftToRight = true;
           }
-          final env = await Ned().parseStringToMap(assetsFileName: '.env');
-          print(env);
-          setState(() {});
+          if (leftToRight) {
+            currentIndex++;
+          } else {
+            currentIndex--;
+          }
+
+          if (pageViewEnable) {
+            controller.jumpToPage(currentIndex);
+          }
+          changeIndexNotifier.value = currentIndex;
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CustomBottomNavigationBar(
         items: bottomTabs,
+        changeIndexNotifier: changeIndexNotifier,
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
         onTap: (index) {
