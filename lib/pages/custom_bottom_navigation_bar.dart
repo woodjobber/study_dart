@@ -228,11 +228,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
   void initState() {
     super.initState();
     useEffect(() {
+      assert(widget.currentIndex >= 0, 'The `currentIndex` field must be >=0');
       currentIndex = widget.currentIndex;
       changeIndexNotifier?.addListener(changeIndex);
       return () {
+        final changeIndexNotifier = this.changeIndexNotifier;
         if (changeIndexNotifier != null) {
-          changeIndexNotifier!.removeListener(changeIndex);
+          changeIndexNotifier.removeListener(changeIndex);
+          changeIndexNotifier.dispose();
         }
       };
     });

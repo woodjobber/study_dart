@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:study_dart/pages/custom_bottom_navigation_bar.dart';
+import 'package:study_dart/pages/effect_state.dart';
 import 'package:study_dart/pages/keep_alive_page.dart';
 import 'package:study_dart/pages/preload_page_view.dart';
 
@@ -167,8 +168,20 @@ class ThirdPage extends StatefulWidget {
 }
 
 class _ThirdPageState extends State<ThirdPage>
-    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin, EffectState {
   late var controller = TabController(length: 3, vsync: this);
+  @override
+  void initState() {
+    useEffect(() {
+      return () {
+        print("_ThirdPageState disposed");
+      };
+    }).autoDispose(() {
+      print("_ThirdPageState disposed2");
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     print("_ThirdPageState");
@@ -731,8 +744,8 @@ class _InheritedModelDemoState extends State<ABModelDemo> {
             },
             child: ElevatedButton(
               onPressed: () {
-                a--;
-                b--;
+                a = max(--a, 0);
+                b = max(--b, 0);
                 setState(() {});
               },
               child: Text(
