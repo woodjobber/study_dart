@@ -33,7 +33,7 @@ class App extends StatelessWidget {
               child: child,
               location: BannerLocation.topStart,
               message: F.name,
-              color: Colors.green.withOpacity(0.6),
+              color: Colors.red.withOpacity(0.6),
               textStyle: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 12.0,

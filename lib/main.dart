@@ -53,7 +53,7 @@ FutureOr<void> main() async {
     FlutterBugly.init(iOSAppId: 'c5f84ad631');
     FlutterBugly.setUserId('123');
     FlutterBugly.setUserTag(247971);
-    FlutterBugly.putUserData(key: "customKey", value: "2");
+    FlutterBugly.putUserData(key: "name", value: "演示");
     runApp(const App());
   }, debugUpload: true);
   testYield();
