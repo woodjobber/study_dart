@@ -15,7 +15,7 @@ class IndexedPage extends StatefulWidget {
   State<IndexedPage> createState() => _IndexedPageState();
 }
 
-class _IndexedPageState extends State<IndexedPage> {
+class _IndexedPageState extends State<IndexedPage> with WidgetsBindingObserver {
   var currentIndex = 0;
   PreloadPageController controller = PreloadPageController(initialPage: 0);
   final List<BottomNavigationBarItem> bottomTabs = [
@@ -38,6 +38,25 @@ class _IndexedPageState extends State<IndexedPage> {
 
   final changeIndexNotifier = ValueNotifier(0);
   bool leftToRight = true;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    debugPrint('state = $state');
+    super.didChangeAppLifecycleState(state);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
