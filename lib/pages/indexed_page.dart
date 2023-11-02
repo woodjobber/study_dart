@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
+import 'package:study_dart/child_size/child_size_demo_a.dart';
+import 'package:study_dart/child_size/size_offset_demo.dart';
 import 'package:study_dart/pages/custom_bottom_navigation_bar.dart';
 import 'package:study_dart/pages/effect_state.dart';
 import 'package:study_dart/pages/keep_alive_page.dart';
@@ -27,9 +29,9 @@ class _IndexedPageState extends State<IndexedPage> with WidgetsBindingObserver {
         icon: Icon(CupertinoIcons.profile_circled), label: '会员中心'),
   ];
 
-  final pages = const [
+  final pages = [
     KeepAlivePage(child: ABModelDemo()),
-    KeepAlivePage(child: TempWidget()),
+    KeepAlivePage(child: SizeOffsetDemo()),
     KeepAlivePage(child: InheritedModelExample()),
     KeepAlivePage(child: FourPage()),
   ];
