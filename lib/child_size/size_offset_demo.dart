@@ -15,6 +15,7 @@ class SizeOffsetDemo extends StatefulWidget implements DemoWidget {
 
 class _SizeOffsetDemoState extends DemoWidgetState {
   double _size = 250;
+
   @override
   Widget buildContent() {
     return Stack(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:study_dart/child_size/child_size_demo_a.dart';
 import 'package:study_dart/child_size/size_offset_demo.dart';
+import 'package:study_dart/page_storage.dart';
 import 'package:study_dart/pages/custom_bottom_navigation_bar.dart';
 import 'package:study_dart/pages/effect_state.dart';
 import 'package:study_dart/pages/keep_alive_page.dart';
@@ -33,7 +34,7 @@ class _IndexedPageState extends State<IndexedPage> with WidgetsBindingObserver {
     KeepAlivePage(child: ABModelDemo()),
     KeepAlivePage(child: SizeOffsetDemo()),
     KeepAlivePage(child: InheritedModelExample()),
-    KeepAlivePage(child: FourPage()),
+    KeepAlivePage(child: PageStorageHomePage()),
   ];
 
   bool pageViewEnable = true;
