@@ -43,6 +43,7 @@ class _PageStorageHomePageState extends State<PageStorageHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('Persistence');
     return Scaffold(
       appBar: AppBar(
         title: Text("Persistence Example"),
@@ -113,21 +114,22 @@ class PageOneState extends State<PageOne> {
           return ExpansionTile(
             key: PageStorageKey('${widget.dataList[index].id}'),
             title: Text(widget.dataList[index].title),
-            // onExpansionChanged: (b) => setState(() {
-            //       widget.dataList[index].expanded = b;
-            //       PageStorage.of(context).writeState(context, b,
-            //           identifier: ValueKey(
-            //             '${widget.dataList[index].id}',
-            //           ));
-            //     }),
-            // initiallyExpanded: widget.dataList[index].expanded,
-            //  PageStorage.of(context).readState(
-            //           context,
-            //           identifier: ValueKey(
-            //             '${widget.dataList[index].id}',
-            //           ),
-            //         ) ??
-            //     false,
+            onExpansionChanged: (b) => setState(() {
+              widget.dataList[index].expanded = b;
+              PageStorage.of(context).writeState(context, b,
+                  identifier: ValueKey(
+                    '${widget.dataList[index].id}',
+                  ));
+            }),
+            initiallyExpanded:
+                // widget.dataList[index].expanded,
+                PageStorage.of(context).readState(
+                      context,
+                      identifier: ValueKey(
+                        '${widget.dataList[index].id}',
+                      ),
+                    ) ??
+                    false,
             children: <Widget>[
               Container(
                 color: index % 2 == 0 ? Colors.orange : color,

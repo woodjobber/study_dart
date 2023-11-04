@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:study_dart/child_size/child_size_demo_a.dart';
 import 'package:study_dart/child_size/size_offset_demo.dart';
+import 'package:study_dart/keep_state/host_screen.dart';
 import 'package:study_dart/page_storage.dart';
 import 'package:study_dart/pages/custom_bottom_navigation_bar.dart';
 import 'package:study_dart/pages/effect_state.dart';
@@ -33,9 +34,16 @@ class _IndexedPageState extends State<IndexedPage> with WidgetsBindingObserver {
   final pages = [
     KeepAlivePage(child: ABModelDemo()),
     KeepAlivePage(child: SizeOffsetDemo()),
-    KeepAlivePage(child: InheritedModelExample()),
+    KeepAlivePage(child: HostPage()),
     KeepAlivePage(child: PageStorageHomePage()),
   ];
+
+  // final pages = [
+  //   ABModelDemo(),
+  //   SizeOffsetDemo(),
+  //   InheritedModelExample(),
+  //   PageStorageHomePage()
+  // ];
 
   bool pageViewEnable = true;
 
@@ -573,6 +581,7 @@ class _InheritedModelExampleState extends State<InheritedModelExample> {
 
   @override
   Widget build(BuildContext context) {
+    print('InheritedModel');
     return Scaffold(
       appBar: AppBar(title: const Text('InheritedModel Sample')),
       body: Column(
@@ -718,6 +727,7 @@ class _InheritedModelDemoState extends State<ABModelDemo> {
   int b = 0;
   @override
   Widget build(BuildContext context) {
+    print('ABModel...');
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

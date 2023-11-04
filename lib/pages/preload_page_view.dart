@@ -48,7 +48,7 @@ import 'package:flutter/widgets.dart';
 ///   Widget build(BuildContext context) {
 ///     return MaterialApp(
 ///       home: Scaffold(
-///         body: PageView(
+///         body: PreloadPageView(
 ///           controller: _pageController,
 ///           children: <Widget>[
 ///             ColoredBox(
@@ -662,8 +662,13 @@ class PreloadPageView extends StatefulWidget {
     this.scrollBehavior,
     this.padEnds = true,
     this.preloadPagesCount = 0,
+    bool keepAlive = false,
   })  : controller = controller ?? _defaultPageController,
-        childrenDelegate = SliverChildListDelegate(children);
+        childrenDelegate = !keepAlive
+            ? SliverChildListDelegate(children)
+            : SliverChildListDelegate(
+                children.map((e) => _KeepAlive(child: e)).toList(),
+              );
 
   /// Creates a scrollable list that works page by page using widgets that are
   /// created on demand.
@@ -708,9 +713,21 @@ class PreloadPageView extends StatefulWidget {
     this.scrollBehavior,
     this.padEnds = true,
     this.preloadPagesCount = 0,
+    bool keepAlive = false,
   })  : controller = controller ?? _defaultPageController,
         childrenDelegate = SliverChildBuilderDelegate(
-          itemBuilder,
+          !keepAlive
+              ? itemBuilder
+              : (ctx, index) {
+                  Widget? child = itemBuilder(ctx, index);
+                  if (child != null) {
+                    return _KeepAlive(
+                      child: child,
+                      key: ValueKey('$index'),
+                    );
+                  }
+                  return child;
+                },
           findChildIndexCallback: findChildIndexCallback,
           childCount: itemCount,
         );
@@ -744,7 +761,7 @@ class PreloadPageView extends StatefulWidget {
   ///   Widget build(BuildContext context) {
   ///     return Scaffold(
   ///       body: SafeArea(
-  ///         child: PageView.custom(
+  ///         child: PreloadPageView.custom(
   ///           childrenDelegate: SliverChildBuilderDelegate(
   ///             (BuildContext context, int index) {
   ///               return KeepAlive(
@@ -1032,4 +1049,37 @@ class _PreloadPageViewState extends State<PreloadPageView> {
         value: widget.allowImplicitScrolling,
         ifTrue: 'allow implicit scrolling'));
   }
+}
+
+class _KeepAlive extends StatefulWidget {
+  const _KeepAlive({
+    Key? key,
+    required this.child,
+    bool keepAlive = true,
+  })  : keepAlive = keepAlive,
+        super(key: key);
+  final Widget child;
+  final bool keepAlive;
+  @override
+  State<_KeepAlive> createState() => _KeepAliveState();
+}
+
+class _KeepAliveState extends State<_KeepAlive>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return widget.child;
+  }
+
+  @override
+  void didUpdateWidget(covariant _KeepAlive oldWidget) {
+    if (oldWidget != widget.child || oldWidget.keepAlive != widget.keepAlive) {
+      updateKeepAlive();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  bool get wantKeepAlive => widget.keepAlive;
 }

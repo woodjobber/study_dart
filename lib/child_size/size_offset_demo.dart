@@ -18,6 +18,7 @@ class _SizeOffsetDemoState extends DemoWidgetState {
 
   @override
   Widget buildContent() {
+    print('sizeOffset...');
     return Stack(
       children: [
         Center(
