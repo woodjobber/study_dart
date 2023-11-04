@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class KeepAlivePage extends StatefulWidget {
-  const KeepAlivePage({
+class KeepAliveWrapper extends StatefulWidget {
+  const KeepAliveWrapper({
     Key? key,
     required this.child,
     this.keepAlive = true,
@@ -9,10 +9,10 @@ class KeepAlivePage extends StatefulWidget {
   final Widget child;
   final bool keepAlive;
   @override
-  State<KeepAlivePage> createState() => _KeepAliveState();
+  State<KeepAliveWrapper> createState() => _KeepAliveState();
 }
 
-class _KeepAliveState extends State<KeepAlivePage>
+class _KeepAliveState extends State<KeepAliveWrapper>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class _KeepAliveState extends State<KeepAlivePage>
   }
 
   @override
-  void didUpdateWidget(covariant KeepAlivePage oldWidget) {
+  void didUpdateWidget(covariant KeepAliveWrapper oldWidget) {
     if (oldWidget != widget.child || oldWidget.keepAlive != widget.keepAlive) {
       updateKeepAlive();
     }

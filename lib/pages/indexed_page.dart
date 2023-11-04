@@ -32,10 +32,10 @@ class _IndexedPageState extends State<IndexedPage> with WidgetsBindingObserver {
   ];
 
   final pages = [
-    KeepAlivePage(child: ABModelDemo()),
-    KeepAlivePage(child: SizeOffsetDemo()),
-    KeepAlivePage(child: HostPage()),
-    KeepAlivePage(child: PageStorageHomePage()),
+    KeepAliveWrapper(child: ABModelDemo()),
+    KeepAliveWrapper(child: SizeOffsetDemo()),
+    KeepAliveWrapper(child: HostPage()),
+    KeepAliveWrapper(child: PageStorageHomePage()),
   ];
 
   // final pages = [
@@ -300,10 +300,10 @@ class _CupertinoTabPageWidgetState extends State<CupertinoTabPageWidget> {
   ];
 
   final pages = const [
-    KeepAlivePage(child: HomePage()),
-    KeepAlivePage(child: SecondPage()),
-    KeepAlivePage(child: ThirdPage()),
-    KeepAlivePage(child: FourPage()),
+    KeepAliveWrapper(child: HomePage()),
+    KeepAliveWrapper(child: SecondPage()),
+    KeepAliveWrapper(child: ThirdPage()),
+    KeepAliveWrapper(child: FourPage()),
   ];
   @override
   Widget build(BuildContext context) {

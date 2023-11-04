@@ -46,7 +46,7 @@ class _HomePageState extends State<HostPage> {
         child: Scaffold(
           body: PageView(
             key: PageStorageKey('page_view'),
-            children: [...list],
+            children: list,
             controller: _controller,
             onPageChanged: onTap,
           ),
