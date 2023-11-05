@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:study_dart/keep_state/screen_a.dart';
 import 'package:study_dart/keep_state/screen_b.dart';
 
-class HostPage extends StatefulWidget {
-  const HostPage({Key? key}) : super(key: key);
+class HostScreen extends StatefulWidget {
+  const HostScreen({Key? key}) : super(key: key);
 
   @override
-  State<HostPage> createState() => _HomePageState();
+  State<HostScreen> createState() => _HomePageState();
 }
 
 final PageStorageBucket _bucket = PageStorageBucket();
 
-class _HomePageState extends State<HostPage> {
+class _HomePageState extends State<HostScreen> {
   int _selectedIndex = 0;
   final PageController _controller = PageController();
 
@@ -69,3 +69,5 @@ class _HomePageState extends State<HostPage> {
 /// 通过在根添加 PageStorage 并向每个页面添加 PageStorageKey，
 /// 页面的某些状态（例如 Scrollable 小部件的滚动位置）将自动存储在其最近的祖先 PageStorage 中，
 /// 并在切换回来时恢复。
+/// 4、Visibility/Offstage + Stack 手动控制
+/// 5、PageStorage.of(context).readState / writeState

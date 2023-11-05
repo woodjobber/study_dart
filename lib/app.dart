@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'flavors.dart';
+import 'keep_state/app_route_observer.dart';
 import 'pages/my_home_page.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -14,6 +15,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: F.title,
       navigatorKey: navigatorKey,
+      navigatorObservers: [AppRouteObserver().routeObserver],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

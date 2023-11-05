@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:study_dart/child_size/child_size_demo_a.dart';
 import 'package:study_dart/child_size/size_offset_demo.dart';
+import 'package:study_dart/keep_state/host_page.dart';
 import 'package:study_dart/keep_state/host_screen.dart';
+import 'package:study_dart/keep_state/listview_pagestorage_key_page.dart';
 import 'package:study_dart/page_storage.dart';
 import 'package:study_dart/pages/custom_bottom_navigation_bar.dart';
 import 'package:study_dart/pages/effect_state.dart';
@@ -32,9 +34,9 @@ class _IndexedPageState extends State<IndexedPage> with WidgetsBindingObserver {
   ];
 
   final pages = [
-    KeepAliveWrapper(child: ABModelDemo()),
+    KeepAliveWrapper(child: ListViewPageStorageKeyPage()),
     KeepAliveWrapper(child: SizeOffsetDemo()),
-    KeepAliveWrapper(child: HostPage()),
+    KeepAliveWrapper(child: HostScreen()),
     KeepAliveWrapper(child: PageStorageHomePage()),
   ];
 
