@@ -44,6 +44,8 @@ class _PageStorageHomePageState extends State<PageStorageHomePage> {
   @override
   Widget build(BuildContext context) {
     print('Persistence');
+
+    /// PageStorage：widget 临时移出 tree，再次attach ，可恢复状态.
     return Scaffold(
       appBar: AppBar(
         title: Text("Persistence Example"),

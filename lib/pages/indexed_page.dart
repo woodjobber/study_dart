@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:study_dart/child_size/child_size_demo_a.dart';
 import 'package:study_dart/child_size/size_offset_demo.dart';
-import 'package:study_dart/keep_state/host_page.dart';
-import 'package:study_dart/keep_state/host_screen.dart';
-import 'package:study_dart/keep_state/listview_pagestorage_key_page.dart';
+import 'package:study_dart/pagestorage_key/host_page.dart';
+import 'package:study_dart/pagestorage_key/host_screen.dart';
+import 'package:study_dart/pagestorage_key/listview_pagestorage_key_page.dart';
 import 'package:study_dart/page_storage.dart';
 import 'package:study_dart/pages/custom_bottom_navigation_bar.dart';
 import 'package:study_dart/pages/effect_state.dart';
-import 'package:study_dart/pages/keep_alive_page.dart';
+import 'package:study_dart/pages/keep_alive_wrapper.dart';
 import 'package:study_dart/pages/preload_page_view.dart';
 import 'package:study_dart/safe_set_state.dart';
+import 'package:study_dart/unique_key/unique_key_page.dart';
+import 'package:study_dart/value_object_key/same_values_page.dart';
+import 'package:study_dart/value_object_key/value_key_page.dart';
 
 class IndexedPage extends StatefulWidget {
   const IndexedPage({super.key});
@@ -34,7 +37,7 @@ class _IndexedPageState extends State<IndexedPage> with WidgetsBindingObserver {
   ];
 
   final pages = [
-    KeepAliveWrapper(child: ListViewPageStorageKeyPage()),
+    KeepAliveWrapper(child: UniqueKeyPage()),
     KeepAliveWrapper(child: SizeOffsetDemo()),
     KeepAliveWrapper(child: HostScreen()),
     KeepAliveWrapper(child: PageStorageHomePage()),

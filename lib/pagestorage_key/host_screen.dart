@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_dart/keep_state/screen_a.dart';
-import 'package:study_dart/keep_state/screen_b.dart';
+import 'package:study_dart/pagestorage_key/screen_a.dart';
+import 'package:study_dart/pagestorage_key/screen_b.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({Key? key}) : super(key: key);
@@ -40,6 +40,7 @@ class _HomePageState extends State<HostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /// 使用 PageView，虽然 children 会每次构建，但状态依然能够保持。
     return MaterialApp(
       home: PageStorage(
         bucket: _bucket,
