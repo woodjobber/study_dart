@@ -3,8 +3,11 @@ import 'dart:isolate';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:study_dart/amigo.dart';
 import 'app.dart';
+import 'middleware/global_middleware.dart';
 
 FutureOr<void> main() async {
   // Isolate.current.addErrorListener(new RawReceivePort((dynamic pair) {

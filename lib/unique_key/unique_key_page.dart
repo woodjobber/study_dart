@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:study_dart/middleware/global_middleware.dart';
 import 'color_state_widget.dart';
 
 class UniqueKeyPage extends StatefulWidget {
@@ -19,6 +21,11 @@ class _UniqueKeyPageState extends State<UniqueKeyPage> {
       ColorStateWidget(key: UniqueKey(), text: '2'),
       // Container(key: UniqueKey(), child: ColorStateWidget(text: '1')),
       // Container(key: UniqueKey(), child: ColorStateWidget(text: '2')),
+      ElevatedButton(
+          onPressed: () {
+            Get.find<AuthController>().authenticated = false;
+          },
+          child: Text('退出登录')),
     ];
   }
 
