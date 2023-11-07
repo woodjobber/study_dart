@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_dart/pagestorage_key/screen_a.dart';
-import 'package:study_dart/pagestorage_key/screen_b.dart';
+import 'package:study_dart/page_storage_key/screen_a.dart';
+import 'package:study_dart/page_storage_key/screen_b.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({Key? key}) : super(key: key);

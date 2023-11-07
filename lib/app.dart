@@ -1,16 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_dart/get_x_material_app/get_x_material_app.dart';
 import 'package:study_dart/middleware/auth/inital_binds.dart';
-import 'package:study_dart/pagestorage_key/app_route_observer.dart';
+import 'package:study_dart/page_storage_key/app_route_observer.dart';
 import 'package:study_dart/routes/app_pages.dart';
 
 import 'flavors.dart';
-import 'middleware/auth/auth_middleware.dart';
-import 'middleware/auth/welcome_page.dart';
 import 'middleware/global_middleware.dart';
-import 'pages/my_home_page.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 

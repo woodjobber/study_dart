@@ -6,12 +6,15 @@ import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 class GetXMaterialApp extends StatelessWidget {
+  /// Side effect. Others that need to be initialized in advance.
   final Function()? effect;
 
   final GlobalKey<NavigatorState>? navigatorKey;
 
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
   final Widget? home;
+
+  /// Lazy function
   final Map<String, WidgetBuilder>? Function()? routes;
   final String? initialRoute;
   final RouteFactory? onGenerateRoute;
@@ -59,6 +62,8 @@ class GetXMaterialApp extends StatelessWidget {
   final Bindings? initialBinding;
   final Duration? transitionDuration;
   final bool? defaultGlobalState;
+
+  /// Lazy function
   final List<GetPage>? Function()? getPages;
   final GetPage? unknownRoute;
   final RouteInformationProvider? routeInformationProvider;
