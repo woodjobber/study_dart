@@ -11,6 +11,7 @@ class UserController extends GetxService {
     }
   }
 
+  Rx<bool> isFirstScreen = true.obs;
   //this object is declared as Rx in order to be reactive in the UI inside the Obx Widget
   Rx<bool> isUserLoggedIn = false.obs;
 }

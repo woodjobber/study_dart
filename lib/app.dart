@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:study_dart/get_material_app_wrapper/get_x_material_app.dart';
+import 'package:study_dart/get_x_material_app/get_x_material_app.dart';
 import 'package:study_dart/middleware/auth/inital_binds.dart';
 import 'package:study_dart/pagestorage_key/app_route_observer.dart';
+import 'package:study_dart/routes/app_pages.dart';
 
 import 'flavors.dart';
 import 'middleware/auth/auth_middleware.dart';
@@ -20,55 +21,22 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetXMaterialApp(
       effect: () {
+        // Others that need to be initialized in advance are placed here.
         Get.put(AuthController());
       },
       title: F.title,
       navigatorKey: navigatorKey,
       navigatorObservers: [AppRouteObserver().routeObserver],
+      initialRoute: AppPages.INITIAL,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       initialBinding: InitialBindings(),
-      getPages: () => [
-        GetPage(
-            page: () => const WelcomePage(),
-            name: '/',
-            middlewares: [AuthMiddleware()]),
-        GetPage(
-          name: '/home',
-          page: () => _flavorBanner(
-            child: MyHomePage(),
-            show: kDebugMode,
-          ),
-          transition: Transition.noTransition,
-          middlewares: [GlobalMiddleware()],
-        ),
-        GetPage(
-            name: '/login',
-            page: () => LoginPage(),
-            binding: LoginBinding(),
-            transition: Transition.noTransition),
-      ],
+      getPages: () => AppPages.routes,
+      routingCallback: (routing) {
+        final controller = Get.find<AuthController>();
+        if (!controller.authenticated) {}
+      },
     );
   }
-
-  Widget _flavorBanner({
-    required Widget child,
-    bool show = true,
-  }) =>
-      show
-          ? Banner(
-              child: child,
-              location: BannerLocation.topStart,
-              message: F.name,
-              color: Colors.red.withOpacity(0.6),
-              textStyle: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 12.0,
-                  letterSpacing: 1.0),
-              textDirection: TextDirection.ltr,
-            )
-          : Container(
-              child: child,
-            );
 }

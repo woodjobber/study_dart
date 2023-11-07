@@ -23,8 +23,9 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Center(
               child: TextButton(
             onPressed: () {
-              controller.isUserLoggedIn.value =
-                  !controller.isUserLoggedIn.value;
+              controller.isUserLoggedIn.value = true;
+              controller.isFirstScreen.value = false;
+              Get.offAllNamed('/home');
             },
             child: Obx(
               //we need the Obx Widget in order for the text to change reactively

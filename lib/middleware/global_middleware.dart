@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_dart/routes/app_pages.dart';
 
 class GlobalMiddleware extends GetMiddleware {
   final authController = Get.find<AuthController>();
@@ -24,9 +25,9 @@ class GlobalMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     print('redirect called..$authController');
-    return authController.authenticated || route == '/login'
+    return authController.authenticated || route == Routes.LOGIN
         ? null
-        : RouteSettings(name: '/login');
+        : RouteSettings(name: Routes.LOGIN);
   }
 
   @override
