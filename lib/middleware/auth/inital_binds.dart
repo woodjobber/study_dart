@@ -3,13 +3,15 @@ import 'user_controller.dart';
 
 class InitialBindings extends Bindings {
   final controller = UserController();
-  bool initialed = false;
+  bool initialized = false;
+
   @override
   void dependencies() {
-    if (initialed) {
+    // 其实是多余的. initialized
+    if (initialized) {
       return;
     }
-    initialed = true;
+    initialized = true;
     print('>>>>> InitialBindings');
     Get.put(controller);
   }
