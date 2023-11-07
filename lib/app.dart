@@ -31,7 +31,9 @@ class App extends StatelessWidget {
       getPages: () => AppPages.routes,
       routingCallback: (routing) {
         final controller = Get.find<AuthController>();
-        if (!controller.authenticated) {}
+        if (!controller.authenticated) {
+          print('routing callback.${routing?.route?.settings.name}');
+        }
       },
     );
   }
