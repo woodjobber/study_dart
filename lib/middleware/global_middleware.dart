@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_dart/remote_image/remote_image.dart';
 import 'package:study_dart/routes/app_pages.dart';
 
 class GlobalMiddleware extends GetMiddleware {
@@ -83,6 +84,7 @@ class AuthController extends GetxController {
         Get.offNamed('/login');
       }
     });
+
     super.onInit();
   }
 }
@@ -146,7 +148,9 @@ class LoginPage extends GetView<LoginController> {
       appBar: AppBar(title: Text('Login')),
       body: Center(
         child: ElevatedButton(
-          child: Text('Login'),
+          child: RImage.remote(
+            'https://p2.music.126.net/5CJeYN35LnzRDsv5Lcs0-Q==/109951165374966765.jpg',
+          ),
           onPressed: () {
             controller.authController.authenticated = true;
           },
