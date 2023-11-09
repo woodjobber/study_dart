@@ -126,6 +126,8 @@ class LoginBinding extends Bindings {
 }
 
 class LoginController extends GetxController {
+  final imgSrc =
+      'https://p2.music.126.net/5CJeYN35LnzRDsv5Lcs0-Q==/109951165374966765.jpg';
   @override
   void onInit() {
     print('>>> LoginController started');
@@ -135,10 +137,15 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    preload(Get.context!);
     Future.delayed(Duration(seconds: 0), () => Get.snackbar("提示", "请先登录APP"));
   }
 
   AuthController get authController => Get.find<AuthController>();
+  void preload(BuildContext context) {
+    var configuration = createLocalImageConfiguration(context);
+    RemoteImage(imgSrc).resolve(configuration);
+  }
 }
 
 class LoginPage extends GetView<LoginController> {
@@ -151,7 +158,7 @@ class LoginPage extends GetView<LoginController> {
           child: Stack(
             children: [
               RImage.remote(
-                'https://p2.music.126.net/5CJeYN35LnzRDsv5Lcs0-Q==/109951165374966765.jpg',
+                controller.imgSrc,
               ),
             ],
           ),
