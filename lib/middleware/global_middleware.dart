@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_dart/remote_image/fade_remote_image.dart';
 import 'package:study_dart/remote_image/remote_image.dart';
 import 'package:study_dart/routes/app_pages.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class GlobalMiddleware extends GetMiddleware {
   final authController = Get.find<AuthController>();
@@ -137,34 +139,67 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    preload(Get.context!);
     Future.delayed(Duration(seconds: 0), () => Get.snackbar("提示", "请先登录APP"));
   }
 
   AuthController get authController => Get.find<AuthController>();
-  void preload(BuildContext context) {
-    var configuration = createLocalImageConfiguration(context);
-    RemoteImage(imgSrc).resolve(configuration);
-  }
 }
 
 class LoginPage extends GetView<LoginController> {
+  void preload(BuildContext context) {
+    var configuration = createLocalImageConfiguration(context);
+    RemoteImage(controller.imgSrc).resolve(configuration);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
-      body: Center(
-        child: MaterialButton(
-          child: Stack(
-            children: [
-              RImage.remote(
-                controller.imgSrc,
+      body: Container(
+        color: Colors.grey,
+        alignment: Alignment.center,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Center(
+            //   child: GestureDetector(
+            //     onTap: () {
+            //       controller.authController.authenticated = true;
+            //     },
+            //     child: RImage.remote(
+            //       controller.imgSrc,
+            //       loadingBuilder: (BuildContext context, Widget child,
+            //           ImageChunkEvent? loadingProgress) {
+            //         if (loadingProgress == null) {
+            //           return child;
+            //         }
+            //         return Center(
+            //           child: CircularProgressIndicator(
+            //             value: loadingProgress.expectedTotalBytes != null
+            //                 ? loadingProgress.cumulativeBytesLoaded /
+            //                     loadingProgress.expectedTotalBytes!
+            //                 : null,
+            //           ),
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  controller.authController.authenticated = true;
+                },
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: 400,
+                  ),
+                  child: FadeRemoteImage.remote(
+                      placeholder: kTransparentImage, image: controller.imgSrc),
+                ),
               ),
-            ],
-          ),
-          onPressed: () {
-            controller.authController.authenticated = true;
-          },
+            ),
+          ],
         ),
       ),
     );
