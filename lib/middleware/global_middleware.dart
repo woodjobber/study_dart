@@ -147,9 +147,13 @@ class LoginPage extends GetView<LoginController> {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
       body: Center(
-        child: ElevatedButton(
-          child: RImage.remote(
-            'https://p2.music.126.net/5CJeYN35LnzRDsv5Lcs0-Q==/109951165374966765.jpg',
+        child: MaterialButton(
+          child: Stack(
+            children: [
+              RImage.remote(
+                'https://p2.music.126.net/5CJeYN35LnzRDsv5Lcs0-Q==/109951165374966765.jpg',
+              ),
+            ],
           ),
           onPressed: () {
             controller.authController.authenticated = true;
