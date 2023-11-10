@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_dart/global_route_observer/global_route_observer.dart';
 import 'package:study_dart/get_x_material_app/get_x_material_app.dart';
 import 'package:study_dart/middleware/auth/inital_binds.dart';
 import 'package:study_dart/page_storage_key/app_route_observer.dart';
@@ -22,7 +23,10 @@ class App extends StatelessWidget {
       },
       title: F.title,
       navigatorKey: navigatorKey,
-      navigatorObservers: [AppRouteObserver().routeObserver],
+      navigatorObservers: [
+        AppRouteObserver().routeObserver,
+        GlobalRouteObserver(),
+      ],
       initialRoute: AppPages.INITIAL,
       theme: ThemeData(
         primarySwatch: Colors.blue,
