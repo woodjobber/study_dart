@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_dart/pages/my_home_page.dart';
 import 'package:study_dart/remote_image/fade_remote_image.dart';
 import 'package:study_dart/remote_image/remote_image.dart';
 import 'package:study_dart/routes/app_pages.dart';
+import 'package:study_dart/single_task/single_task.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class GlobalMiddleware extends GetMiddleware {
@@ -81,9 +83,9 @@ class AuthController extends GetxController {
     ever(_authenticated, (value) {
       if (value) {
         username = 'Eduardo';
-        Get.offNamed('/home');
+        Get.offNamedSingleTask('/home');
       } else {
-        Get.offNamed('/login');
+        Get.offNamedSingleTask('/login');
       }
     });
 

@@ -50,6 +50,7 @@ dependencies:
   connectivity_plus: any
   dio: any
   transparent_image: any
+  logger: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
