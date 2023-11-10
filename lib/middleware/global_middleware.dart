@@ -1,6 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:study_dart/pages/my_home_page.dart';
+import 'package:study_dart/custom_gesture_recognizer.dart';
 import 'package:study_dart/remote_image/fade_remote_image.dart';
 import 'package:study_dart/remote_image/remote_image.dart';
 import 'package:study_dart/routes/app_pages.dart';
@@ -132,9 +133,14 @@ class LoginBinding extends Bindings {
 class LoginController extends GetxController {
   final imgSrc =
       'https://p2.music.126.net/5CJeYN35LnzRDsv5Lcs0-Q==/109951165374966765.jpg';
+  final tapGestureRecognizer = TapGestureRecognizer();
+  var toggle = false.obs;
   @override
   void onInit() {
     print('>>> LoginController started');
+    tapGestureRecognizer.onTap = () {
+      toggle.value = !toggle.value;
+    };
     super.onInit();
   }
 
@@ -142,6 +148,12 @@ class LoginController extends GetxController {
   void onReady() {
     super.onReady();
     Future.delayed(Duration(seconds: 0), () => Get.snackbar("提示", "请先登录APP"));
+  }
+
+  @override
+  void onClose() {
+    tapGestureRecognizer.dispose();
+    super.onClose();
   }
 
   AuthController get authController => Get.find<AuthController>();
@@ -163,46 +175,105 @@ class LoginPage extends GetView<LoginController> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Center(
-            //   child: GestureDetector(
-            //     onTap: () {
-            //       controller.authController.authenticated = true;
-            //     },
-            //     child: RImage.remote(
-            //       controller.imgSrc,
-            //       loadingBuilder: (BuildContext context, Widget child,
-            //           ImageChunkEvent? loadingProgress) {
-            //         if (loadingProgress == null) {
-            //           return child;
-            //         }
-            //         return Center(
-            //           child: CircularProgressIndicator(
-            //             value: loadingProgress.expectedTotalBytes != null
-            //                 ? loadingProgress.cumulativeBytesLoaded /
-            //                     loadingProgress.expectedTotalBytes!
-            //                 : null,
-            //           ),
-            //         );
-            //       },
-            //     ),
-            //   ),
-            // ),
             Center(
               child: GestureDetector(
                 onTap: () {
                   controller.authController.authenticated = true;
                 },
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: 400,
-                  ),
-                  child: FadeRemoteImage.remote(
-                      placeholder: kTransparentImage, image: controller.imgSrc),
+                child: RImage.remote(
+                  controller.imgSrc,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
+            Listener(
+              onPointerDown: (v) {
+                print('object');
+              },
+              child: AbsorbPointer(
+                absorbing: false,
+                child: Center(
+                  child: Listener(
+                    onPointerDown: (v) {
+                      controller.authController.authenticated = true;
+                    },
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: 400,
+                      ),
+                      child: FadeRemoteImage.remote(
+                          placeholder: kTransparentImage,
+                          image: controller.imgSrc),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Obx(() => Text.rich(TextSpan(children: [
+                  TextSpan(text: '您好事件'),
+                  TextSpan(
+                    text: '比那氏',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: controller.toggle.value
+                          ? Colors.blueGrey
+                          : Colors.black,
+                    ),
+                    recognizer: controller.tapGestureRecognizer,
+                  )
+                ]))),
+            wChild(1, Colors.white, 200),
+            Container(
+              color: Colors.green,
+              width: 150,
+              height: 150,
+            ),
+            CustomTapGestureRecognizer.detector(
+              onTap: () {
+                print("object1");
+              },
+              child: Container(
+                color: Colors.blue,
+                width: 100,
+                height: 100,
+                child: GestureDetector(
+                  onTap: () {
+                    print("object2");
+                  },
+                  child: Container(
+                    color: Colors.blue,
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget wChild(int index, color, double size) {
+    return Listener(
+      onPointerDown: (e) => print(index),
+      child: Container(
+        width: size,
+        height: size,
+        color: Colors.grey,
       ),
     );
   }
