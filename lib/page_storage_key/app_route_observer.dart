@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppRouteObserver {
+class AppRouteObserver<R extends Route<dynamic>> extends RouteObserver<R> {
   //这是实际上的路由监听器
   static final RouteObserver<ModalRoute<void>> _routeObserver =
       RouteObserver<ModalRoute<void>>();
@@ -8,13 +8,23 @@ class AppRouteObserver {
   static final AppRouteObserver _appRouteObserver =
       AppRouteObserver._internal();
 
-  AppRouteObserver._internal() {}
+  AppRouteObserver._internal();
+
+  static AppRouteObserver get instance => _appRouteObserver;
+
   //通过单例的get方法轻松获取路由监听器
   RouteObserver<ModalRoute<void>> get routeObserver {
     return _routeObserver;
   }
 
   factory AppRouteObserver() {
-    return _appRouteObserver;
+    return AppRouteObserver.instance as AppRouteObserver<R>;
   }
+}
+
+T asT<T>(value, {required T defaultValue}) {
+  if (value is T) {
+    return value;
+  }
+  return defaultValue;
 }
