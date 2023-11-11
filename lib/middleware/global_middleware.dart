@@ -1,7 +1,10 @@
+import 'package:dart_openai/dart_openai.dart';
+import 'package:defer_pointer/defer_pointer.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_dart/custom_gesture_recognizer.dart';
+import 'package:study_dart/logger/logger.dart';
 import 'package:study_dart/remote_image/fade_remote_image.dart';
 import 'package:study_dart/remote_image/remote_image.dart';
 import 'package:study_dart/routes/app_pages.dart';
@@ -136,11 +139,33 @@ class LoginController extends GetxController {
   final tapGestureRecognizer = TapGestureRecognizer();
   var toggle = false.obs;
   @override
-  void onInit() {
+  void onInit() async {
     print('>>> LoginController started');
     tapGestureRecognizer.onTap = () {
       toggle.value = !toggle.value;
     };
+    /*
+    OpenAI.apiKey = 'sess-FxwNtOrpPwUgJW0PzjuFD5U2YTq2wUCpxYlHb75P';
+    // Start using!
+    final completion = await OpenAI.instance.completion.create(
+      model: "text-davinci-003",
+      prompt: "用 dart 语言写一个单例",
+    );
+
+    // Printing the output to the console
+    completion.choices.forEach((element) {
+      logger.d(element.text);
+    });
+
+    // Generate an image from a prompt.
+    final image = await OpenAI.instance.image.create(
+      prompt: "dinosaur",
+      n: 1,
+    );
+
+    // Printing the output to the console.
+    logger.d(image.data.first.url);
+     */
     super.onInit();
   }
 
@@ -175,6 +200,7 @@ class LoginPage extends GetView<LoginController> {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            /*
             Center(
               child: GestureDetector(
                 onTap: () {
@@ -249,14 +275,44 @@ class LoginPage extends GetView<LoginController> {
                 color: Colors.blue,
                 width: 100,
                 height: 100,
+                alignment: Alignment.topRight,
                 child: GestureDetector(
                   onTap: () {
                     print("object2");
                   },
                   child: Container(
-                    color: Colors.blue,
-                    width: 100,
-                    height: 100,
+                    color: Colors.orangeAccent,
+                    width: 10,
+                    height: 10,
+                  ),
+                ),
+              ),
+            ),*/
+            Center(
+              child: DeferredPointerHandler(
+                child: Container(
+                  color: Colors.black54,
+                  width: 40,
+                  height: 40,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Positioned(
+                        bottom: -30,
+                        child: DeferPointer(
+                          child: CustomTapGestureRecognizer.detector(
+                            onTap: () {
+                              controller.authController.authenticated = true;
+                            },
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              color: Colors.purple,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),

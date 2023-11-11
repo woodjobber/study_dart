@@ -51,6 +51,9 @@ dependencies:
   dio: any
   transparent_image: any
   logger: any
+  defer_pointer:
+  tuple: any
+  dart_openai:
 dev_dependencies:
   flutter_test:
     sdk: flutter
