@@ -19,5 +19,5 @@ class OneInterceptor extends DialogInterceptor {
   }
 
   @override
-  int get priority => super.priority;
+  int get priority => -3;
 }

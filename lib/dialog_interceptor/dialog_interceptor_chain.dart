@@ -24,10 +24,8 @@ class DialogInterceptorChain<T extends DialogOptions,
     _interceptors.sort((a, b) => a.priority.compareTo(b.priority));
   }
 
-  U removeInterceptor(Type type) {
-    final interceptor = _interceptors.firstWhere((e) => e.runtimeType == type);
-    _interceptors.remove(interceptor);
-    return interceptor;
+  void removeInterceptor(Type type) {
+    _interceptors.removeWhere((e) => e.runtimeType == type);
   }
 
   void send(T options) async {
