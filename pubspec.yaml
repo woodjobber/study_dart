@@ -53,7 +53,8 @@ dependencies:
   logger: any
   defer_pointer:
   tuple: any
-  dart_openai:
+  dart_openai: any
+  adaptive_dialog: ^1.10.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

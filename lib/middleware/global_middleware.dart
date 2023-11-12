@@ -2,14 +2,25 @@ import 'package:dart_openai/dart_openai.dart';
 import 'package:defer_pointer/defer_pointer.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:study_dart/custom_gesture_recognizer.dart';
+import 'package:study_dart/dialog_interceptor/dialog_options.dart';
+import 'package:study_dart/dialog_interceptor/dialog_interceptor_chain.dart';
+import 'package:study_dart/dialog_interceptor/dialog_interceptor_handler.dart';
+import 'package:study_dart/dialog_interceptor/one_interceptor.dart';
+import 'package:study_dart/dialog_interceptor/three_interceptor.dart';
+import 'package:study_dart/dialog_interceptor/two_interceptor.dart';
 import 'package:study_dart/logger/logger.dart';
 import 'package:study_dart/remote_image/fade_remote_image.dart';
 import 'package:study_dart/remote_image/remote_image.dart';
 import 'package:study_dart/routes/app_pages.dart';
 import 'package:study_dart/single_task/single_task.dart';
+import 'package:study_dart/slide_captcha_widget/slide_captcha_widget.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import '../slide_captcha_widget/custom_radar_chart.dart';
+import '../slide_captcha_widget/radar_chart.dart';
 
 class GlobalMiddleware extends GetMiddleware {
   final authController = Get.find<AuthController>();
@@ -138,6 +149,9 @@ class LoginController extends GetxController {
       'https://p2.music.126.net/5CJeYN35LnzRDsv5Lcs0-Q==/109951165374966765.jpg';
   final tapGestureRecognizer = TapGestureRecognizer();
   var toggle = false.obs;
+
+  final DialogInterceptorChain client = DialogInterceptorChain();
+
   @override
   void onInit() async {
     print('>>> LoginController started');
@@ -166,6 +180,12 @@ class LoginController extends GetxController {
     // Printing the output to the console.
     logger.d(image.data.first.url);
      */
+
+    client.addInterceptors([
+      OneInterceptor(),
+      TwoInterceptor(),
+      ThreeInterceptor(),
+    ]);
     super.onInit();
   }
 
@@ -173,6 +193,7 @@ class LoginController extends GetxController {
   void onReady() {
     super.onReady();
     Future.delayed(Duration(seconds: 0), () => Get.snackbar("提示", "请先登录APP"));
+    client.send(AlertOptions(msg: '我是弹窗信息', title: '测试'));
   }
 
   @override
@@ -303,6 +324,8 @@ class LoginPage extends GetView<LoginController> {
                           child: CustomTapGestureRecognizer.detector(
                             onTap: () {
                               controller.authController.authenticated = true;
+                              // SystemChannels.platform
+                              //     .invokeMethod<void>('SystemNavigator.pop');
                             },
                             child: Container(
                               width: 50,
@@ -316,7 +339,7 @@ class LoginPage extends GetView<LoginController> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -330,6 +353,43 @@ class LoginPage extends GetView<LoginController> {
         width: size,
         height: size,
         color: Colors.grey,
+      ),
+    );
+  }
+}
+
+class SlideVerificationCode extends StatefulWidget {
+  @override
+  _SlideVerificationCodeState createState() => _SlideVerificationCodeState();
+}
+
+class _SlideVerificationCodeState extends State<SlideVerificationCode> {
+  double _sliderValue = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onHorizontalDragUpdate: (DragUpdateDetails details) {
+        setState(() {
+          _sliderValue += details.delta.dx;
+          _sliderValue = _sliderValue > 0 ? _sliderValue : 0;
+        });
+      },
+      child: Container(
+        width: 300,
+        height: 50,
+        color: Colors.grey[200],
+        child: Stack(
+          alignment: Alignment.centerLeft,
+          children: <Widget>[
+            Container(
+              width: _sliderValue > 300 ? 300 : _sliderValue,
+              height: 50,
+              color: Colors.green,
+            ),
+            Text('拖动滑块验证'),
+          ],
+        ),
       ),
     );
   }
