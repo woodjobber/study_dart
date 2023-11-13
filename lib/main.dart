@@ -59,6 +59,7 @@ FutureOr<void> main() async {
     FlutterBugly.putUserData(key: "name", value: "演示");
     runApp(const App());
   }, debugUpload: true);
+  AB().test();
   testYield();
 }
 

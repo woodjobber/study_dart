@@ -144,3 +144,47 @@ class Student {
     );
   }
 }
+
+/// mixin\extends\implements 同方法优先级问题
+mixin A {
+  void test() {
+    print("object A");
+  }
+}
+mixin B {
+  void test() {
+    print("object B");
+  }
+}
+
+class C {
+  void test() {
+    print("object C");
+  }
+}
+
+class D {
+  void test() {
+    print("object D");
+  }
+
+  void test2() {
+    print("object D2");
+  }
+}
+
+class AB extends C with A, B implements D {
+  @override
+  void test() {
+    super.test();
+  }
+
+  @override
+  void test2() {
+    super.test();
+  }
+}
+
+abstract class F {
+  void test();
+}
