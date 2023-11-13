@@ -185,6 +185,7 @@ class LoginController extends GetxController {
       OneInterceptor(),
       TwoInterceptor(),
       ThreeInterceptor(),
+      ThreeInterceptor(),
     ]);
     super.onInit();
   }

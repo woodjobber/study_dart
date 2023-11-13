@@ -55,6 +55,7 @@ dependencies:
   tuple: any
   dart_openai: any
   adaptive_dialog: ^1.10.0
+  rxdart: ^0.27.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

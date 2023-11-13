@@ -28,6 +28,8 @@ class App extends StatelessWidget {
         GlobalRouteObserver(),
       ],
       initialRoute: AppPages.INITIAL,
+
+      // home: FartherWidget(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
