@@ -7,3 +7,11 @@ extension IterableExtension<T> on Iterable<T> {
     return unique.values.toList();
   }
 }
+
+Iterable<E> removeDuplicates<E>(Iterable<E> iterable) sync* {
+  Set<E> items = {};
+  for (E item in iterable) {
+    if (!items.contains(item)) yield item;
+    items.add(item);
+  }
+}

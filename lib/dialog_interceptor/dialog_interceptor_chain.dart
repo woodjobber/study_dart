@@ -72,12 +72,4 @@ class DialogInterceptorChain<T extends DialogOptions,
       index++;
     }
   }
-
-  Iterable<E> removeDuplicates<E>(Iterable<E> iterable) sync* {
-    Set<E> items = {};
-    for (E item in iterable) {
-      if (!items.contains(item)) yield item;
-      items.add(item);
-    }
-  }
 }
