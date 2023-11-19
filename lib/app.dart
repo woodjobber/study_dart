@@ -6,6 +6,7 @@ import 'package:study_dart/middleware/auth/inital_binds.dart';
 import 'package:study_dart/page_storage_key/app_route_observer.dart';
 import 'package:study_dart/routes/app_pages.dart';
 
+import 'father_widget.dart';
 import 'flavors.dart';
 import 'middleware/global_middleware.dart';
 
@@ -27,9 +28,9 @@ class App extends StatelessWidget {
         AppRouteObserver().routeObserver,
         GlobalRouteObserver(),
       ],
-      initialRoute: AppPages.INITIAL,
+      // initialRoute: AppPages.INITIAL,
 
-      // home: FartherWidget(),
+      home: FartherWidget(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

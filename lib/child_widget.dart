@@ -30,6 +30,12 @@ class _ChildWidgetState extends State<ChildWidget> {
   }
 
   @override
+  void reassemble() {
+    logger.d('reassemble = _ChildWidgetState');
+    super.reassemble();
+  }
+
+  @override
   void deactivate() {
     logger.d('deactivate _ChildWidgetState');
     super.deactivate();
