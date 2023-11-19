@@ -1,10 +1,18 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:dio/io.dart';
+
+import 'package:basic_utils/basic_utils.dart';
 import 'package:dart_openai/dart_openai.dart';
 import 'package:defer_pointer/defer_pointer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:study_dart/custom_gesture_recognizer.dart';
+import 'package:study_dart/custom_scroll_physics.dart';
+import 'package:study_dart/custom_tooltip.dart';
 import 'package:study_dart/dialog_interceptor/dialog_options.dart';
 import 'package:study_dart/dialog_interceptor/dialog_interceptor_chain.dart';
 import 'package:study_dart/dialog_interceptor/dialog_interceptor_handler.dart';
@@ -12,6 +20,7 @@ import 'package:study_dart/dialog_interceptor/one_interceptor.dart';
 import 'package:study_dart/dialog_interceptor/three_interceptor.dart';
 import 'package:study_dart/dialog_interceptor/two_interceptor.dart';
 import 'package:study_dart/logger/logger.dart';
+import 'package:study_dart/print_ext.dart';
 import 'package:study_dart/remote_image/fade_remote_image.dart';
 import 'package:study_dart/remote_image/remote_image.dart';
 import 'package:study_dart/routes/app_pages.dart';
@@ -21,6 +30,11 @@ import 'package:transparent_image/transparent_image.dart';
 
 import '../slide_captcha_widget/custom_radar_chart.dart';
 import '../slide_captcha_widget/radar_chart.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
+Future<ByteData> loadAsset() async {
+  return await rootBundle.load('assets/dd.pem');
+}
 
 class GlobalMiddleware extends GetMiddleware {
   final authController = Get.find<AuthController>();
@@ -94,7 +108,7 @@ class AuthController extends GetxController {
   set username(String value) => _username.value = value;
 
   @override
-  void onInit() {
+  void onInit() async {
     ever(_authenticated, (value) {
       if (value) {
         username = 'Eduardo';
@@ -103,7 +117,6 @@ class AuthController extends GetxController {
         Get.offNamedSingleTask('/login');
       }
     });
-
     super.onInit();
   }
 }
@@ -183,11 +196,67 @@ class LoginController extends GetxController {
 
     client.addInterceptors([
       OneInterceptor(),
-      TwoInterceptor(),
-      ThreeInterceptor(),
-      ThreeInterceptor(),
+      // TwoInterceptor(),
+      // ThreeInterceptor(),
     ]);
+    final pem = await _readPemCert('assets/google.com.hk.pem');
+    final p = X509Utils.x509CertificateFromPem(pem);
+    p.sha256Thumbprint.msg('sha256 ').print;
+    decodePEM(pem);
+    final certificates = await rootBundle.load('assets/soer.top.crt');
+    final dio = Dio();
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final securityContext = SecurityContext(); //1
+      securityContext
+          .setTrustedCertificatesBytes(certificates.buffer.asUint8List());
+      final client = HttpClient(context: securityContext);
+      client.badCertificateCallback = (cert, host, port) {
+        return false;
+      };
+      return client;
+    };
+
+    final response = await dio.getUri(Uri.parse('https://soer.top'));
+    print(response.statusCode);
     super.onInit();
+  }
+
+  Future<String> _readPemCert(String path) async {
+    final sslCert = await rootBundle.load(path);
+    final data = sslCert.buffer.asUint8List();
+    final pemString = utf8.decode(data);
+    return pemString;
+  }
+
+  Uint8List decodePEM(String pem) {
+    var startsWith = [
+      '-----BEGIN PUBLIC KEY-----',
+      '-----BEGIN PRIVATE KEY-----',
+      '-----BEGIN CERTIFICATE-----',
+    ];
+    var endsWith = [
+      '-----END PUBLIC KEY-----',
+      '-----END PRIVATE KEY-----',
+      '-----END CERTIFICATE-----'
+    ];
+    pem = pem.trim();
+    //HACK
+    for (var s in startsWith) {
+      if (pem.startsWith(s)) {
+        pem = pem.substring(s.length);
+      }
+    }
+
+    for (var s in endsWith) {
+      if (pem.trim().endsWith(s)) {
+        pem = pem.trim().split(s)[0];
+      }
+    }
+
+    //Dart base64 decoder does not support line breaks
+    pem = pem.replaceAll('\n', '');
+    pem = pem.replaceAll('\r', '');
+    return Uint8List.fromList(base64.decode(pem));
   }
 
   @override
