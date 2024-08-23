@@ -103,23 +103,7 @@ void log(Object? message) {
   }
 }
 
-class Service with IsolateChannelMixin {
-  Future<List<int>> performExpensiveWork() => run(() => _expensiveWork());
-  Future<List<int>> performExpensiveWork2() => run(() => _expensiveWork());
-  Future<List<int>> performExpensiveWork3() => run(() => _expensiveWork());
-  Future<List<int>> performExpensiveWork4() => run(() => _expensiveWork());
-  Future<List<int>> performExpensiveWork5() => run(() => _expensiveWork());
-  Future<List<int>> performExpensiveWork6() => run(() => _expensiveWork());
-  Future<List<int>> performExpensiveWork7() => run(() => _expensiveWork());
-}
-
-Future<List<int>> _expensiveWork() async {
-  List<int> result = [];
-  for (int i = 0; i < 1000000; i++) {
-    result.add(i);
-  }
-  return result;
-}
+class Service with IsolateChannelMixin {}
 
 class Student {
   String _name;

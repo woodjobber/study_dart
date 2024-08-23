@@ -1,13 +1,15 @@
-import 'package:flutter/services.dart';
-import 'package:study_dart/isolate_channel/isolate_entry.dart';
+import 'dart:async';
 
-Future isolateEntryPoint(IsolateEntry entry) async {
-  final Function function = entry.function;
+import 'package:flutter/services.dart';
+import 'isolate_entry.dart';
+
+void isolateEntryPoint<T, U>(IsolateEntry<T, U> entry) async {
+  final FutureOr<T> Function(U) function = entry.function;
   try {
     BackgroundIsolateBinaryMessenger.ensureInitialized(entry.rootIsolateToken);
   } on MissingPluginException catch (e) {
     return Future.error(e.toString());
   }
-  final result = await function();
+  final result = await function(entry.message);
   entry.sendPort.send(result);
 }

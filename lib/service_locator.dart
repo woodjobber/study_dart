@@ -24,7 +24,7 @@ class ServiceLocator {
 class Vehicle {
   Vehicle(this.color);
   final String color;
-  final String definiton = "v";
+  final String definition = "v";
 
   void method() {}
 }
@@ -35,8 +35,8 @@ class Car implements Vehicle {
   String get color => throw UnimplementedError();
 
   @override
-  // TODO: implement definiton
-  String get definiton => throw UnimplementedError();
+  // TODO: implement definition
+  String get definition => throw UnimplementedError();
 
   @override
   void method() {}

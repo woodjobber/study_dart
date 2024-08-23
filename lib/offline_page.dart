@@ -5,16 +5,17 @@ class OfflinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Offline Demo"),
+      appBar: AppBar(
+        title: Text("Offline Demo"),
       ),
       body: OfflineBuilder(
         connectivityBuilder: (
           BuildContext context,
-          ConnectivityResult connectivity,
+          connectivity,
           Widget child,
         ) {
-          final bool connected = connectivity != ConnectivityResult.none;
+          final bool connected =
+              !connectivity.contains(ConnectivityResult.none);
           return new Stack(
             fit: StackFit.expand,
             children: [

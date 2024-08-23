@@ -18,6 +18,7 @@
 		5AB816C35A9592B6BAA4814E /* stgLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF9665D96E2B842491B4E35C /* stgLaunchScreen.storyboard */; };
 		5ECC4FC58D005E34ABF17FCD /* prodProfile.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 77F87AF22A29D6A2C98CC9D8 /* prodProfile.xcconfig */; };
 		6A25401A13BF4540AC99AF67 /* env_releaseLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2BD396929F6AE2BBF043D6A /* env_releaseLaunchScreen.storyboard */; };
+		7C9143342B12289E008F9641 /* Te.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9143332B12289E008F9641 /* Te.m */; };
 		7CCA77BE2AD4E54300986CD4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CCA77BD2AD4E54300986CD4 /* SystemConfiguration.framework */; };
 		7CCA77C02AD4E54E00986CD4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CCA77BF2AD4E54E00986CD4 /* libz.tbd */; };
 		7CCA77C22AD4E55800986CD4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CCA77C12AD4E55800986CD4 /* Security.framework */; };
@@ -73,6 +74,9 @@
 		7AFFD8ED1D35381100E5BB4D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7C048E032AD1B040004BE82D /* AppEnvConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AppEnvConfig.xcconfig; path = Flutter/AppEnvConfig.xcconfig; sourceTree = "<group>"; };
+		7C9143312B122885008F9641 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
+		7C9143322B12289E008F9641 /* Te.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Te.h; sourceTree = "<group>"; };
+		7C9143332B12289E008F9641 /* Te.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Te.m; sourceTree = "<group>"; };
 		7CCA77BD2AD4E54300986CD4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7CCA77BF2AD4E54E00986CD4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7CCA77C12AD4E55800986CD4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -201,6 +205,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				7C9143312B122885008F9641 /* Runner.entitlements */,
 				7AFFD8ED1D35381100E5BB4D /* AppDelegate.h */,
 				7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -209,6 +214,8 @@
 				97C146F11CF9000F007C117D /* Supporting Files */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
+				7C9143322B12289E008F9641 /* Te.h */,
+				7C9143332B12289E008F9641 /* Te.m */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -235,6 +242,7 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				64353AC65B15C2B2B9EE4724 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -344,6 +352,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		64353AC65B15C2B2B9EE4724 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -366,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C9143342B12289E008F9641 /* Te.m in Sources */,
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
@@ -517,8 +543,9 @@
 			baseConfigurationReference = 7C048E032AD1B040004BE82D /* AppEnvConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -526,7 +553,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.sutudyDart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -891,8 +918,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB2B7502333DE559A1495271 /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -905,8 +934,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D554805126A1CBEE7DAF8831 /* Pods-Runner.profile-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -919,8 +950,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CEEAAE5697C767C1AAD5076B /* Pods-Runner.release-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -933,8 +966,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2188EB91CDC58C60485BB7CA /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -947,8 +982,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C008A1616C9AD76DE5EC6027 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -961,8 +998,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A72D17512A7F8EF16F8E059 /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -975,8 +1014,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 658DEDF07FA5B1DF7BD9BF7F /* Pods-Runner.debug-stg.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -989,8 +1030,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F3162F29077F65BAC6BDA3D /* Pods-Runner.profile-stg.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1003,8 +1046,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D73EAC2A9F718295366B545 /* Pods-Runner.release-stg.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1196,8 +1241,9 @@
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1205,7 +1251,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.sutudyDart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1221,8 +1267,9 @@
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = WYMPMVT32S;
+				DEVELOPMENT_TEAM = AQQ23CJPMD;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1230,7 +1277,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.sutudyDart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xht.lkchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
