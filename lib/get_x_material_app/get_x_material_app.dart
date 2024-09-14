@@ -8,7 +8,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 
 class GetXMaterialApp extends StatelessWidget {
   /// Side effect. Others that need to be initialized in advance.
-  final Function()? onAdvanceInit;
+  final void Function()? onAdvanceInit;
 
   final GlobalKey<NavigatorState>? navigatorKey;
 
