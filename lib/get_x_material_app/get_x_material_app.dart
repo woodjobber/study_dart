@@ -8,7 +8,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 
 class GetXMaterialApp extends StatelessWidget {
   /// Side effect. Others that need to be initialized in advance.
-  final Function()? effect;
+  final Function()? onAdvanceInit;
 
   final GlobalKey<NavigatorState>? navigatorKey;
 
@@ -75,7 +75,7 @@ class GetXMaterialApp extends StatelessWidget {
 
   GetXMaterialApp({
     Key? key,
-    this.effect,
+    this.onAdvanceInit,
     this.navigatorKey,
     this.scaffoldMessengerKey,
     this.home,
@@ -135,7 +135,7 @@ class GetXMaterialApp extends StatelessWidget {
         routerDelegate = null,
         backButtonDispatcher = null,
         super(key: key) {
-    _effect = effect?.call();
+    _effect = onAdvanceInit?.call();
     _initialBinding = initialBinding?..dependencies();
     _getPages = getPages?.call();
     _routes = routes?.call() ?? const <String, WidgetBuilder>{};
@@ -199,7 +199,7 @@ class GetXMaterialApp extends StatelessWidget {
     this.getPages,
     this.navigatorObservers,
     this.unknownRoute,
-    this.effect,
+    this.onAdvanceInit,
   })  : routerDelegate = routerDelegate ??= Get.createDelegate(
           notFoundRoute: unknownRoute,
         ),
@@ -213,7 +213,7 @@ class GetXMaterialApp extends StatelessWidget {
         routes = null,
         initialRoute = null,
         super(key: key) {
-    _effect = effect?.call();
+    _effect = onAdvanceInit?.call();
     _initialBinding = initialBinding?..dependencies();
     _getPages = getPages?.call();
     _routes = routes?.call() ?? const <String, WidgetBuilder>{};

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class AllwaysScrollableWithKeepPositionScrollPhysics extends ScrollPhysics {
+class AlwaysScrollableWithKeepPositionScrollPhysics extends ScrollPhysics {
   final double? Function(double)? _onGetScrollPosition;
 
-  const AllwaysScrollableWithKeepPositionScrollPhysics(
+  const AlwaysScrollableWithKeepPositionScrollPhysics(
       {ScrollPhysics? parent, double? Function(double)? onGetScrollPosition})
       : _onGetScrollPosition = onGetScrollPosition,
         super(parent: parent);
 
   @override
-  AllwaysScrollableWithKeepPositionScrollPhysics applyTo(
+  AlwaysScrollableWithKeepPositionScrollPhysics applyTo(
       ScrollPhysics? ancestor) {
-    return AllwaysScrollableWithKeepPositionScrollPhysics(
+    return AlwaysScrollableWithKeepPositionScrollPhysics(
         parent: buildParent(ancestor),
         onGetScrollPosition: _onGetScrollPosition);
   }

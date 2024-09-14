@@ -18,7 +18,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetXMaterialApp(
-      effect: () {
+      onAdvanceInit: () {
         // Others that need to be initialized in advance are placed here.
         Get.put(AuthController());
       },
@@ -36,6 +36,12 @@ class App extends StatelessWidget {
       ),
       initialBinding: InitialBindings(),
       getPages: () => AppPages.routes,
+      onGenerateRoute: (setting) {
+        return null;
+      },
+      onUnknownRoute: (setting) {
+        return null;
+      },
       routingCallback: (routing) {
         final controller = Get.find<AuthController>();
         if (!controller.authenticated) {
@@ -45,3 +51,25 @@ class App extends StatelessWidget {
     );
   }
 }
+
+var onGenerateRoute = (RouteSettings settings) {
+  final routes = {
+    '/search': (context, {arguments}) => FartherWidget(),
+  };
+  final String? name = settings.name;
+  final Function? pageContentBuilder = routes[name] as Function;
+  if (pageContentBuilder != null) {
+    if (settings.arguments != null) {
+      final Route route = MaterialPageRoute(
+          settings: settings,
+          builder: (context) =>
+              pageContentBuilder(context, arguments: settings.arguments));
+      return route;
+    } else {
+      final Route route = MaterialPageRoute(
+          settings: settings,
+          builder: (context) => pageContentBuilder(context));
+      return route;
+    }
+  }
+};

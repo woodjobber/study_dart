@@ -1,9 +1,13 @@
 // ignore_for_file: avoid_print
 import 'dart:isolate';
+import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:study_dart/isolate_channel/isolate_channel_mixin.dart';
+import 'package:study_dart/iterable_ext.dart';
 
 sealed class Amigo {}
 
@@ -130,6 +134,7 @@ class Student {
 }
 
 /// mixin\extends\implements 同方法优先级问题
+/// extends子类方法 > mixin > implements
 mixin A {
   void test() {
     print("object A");
@@ -171,4 +176,20 @@ class AB extends C with A, B implements D {
 
 abstract class F {
   void test();
+}
+
+class OffscreenPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final PictureRecorder recorder = PictureRecorder();
+    final Canvas offscreenCanvas = Canvas(recorder);
+    offscreenCanvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height),
+        Paint()..color = Colors.blue);
+    canvas.drawPicture(recorder.endRecording());
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
 }
